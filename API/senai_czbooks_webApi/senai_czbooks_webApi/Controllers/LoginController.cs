@@ -27,7 +27,6 @@ namespace senai_czbooks_webApi.Controllers
             _usuarioRepository = new UsuarioRepository();
         }
 
-        [Authorize(Roles = "1,2,3")]
         [HttpPost]
         public IActionResult Login(LoginViewModel login)
         {

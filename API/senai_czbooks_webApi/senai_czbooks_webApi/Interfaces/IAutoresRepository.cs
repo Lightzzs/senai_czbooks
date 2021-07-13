@@ -8,6 +8,7 @@ namespace senai_czbooks_webApi.Interfaces
 {
     interface IAutoresRepository
     {
-        List<Autores> Listar();
+        List<Autore> Listar();
+
     }
 }

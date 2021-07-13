@@ -10,6 +10,8 @@ namespace senai_czbooks_webApi.Interfaces
     {
         List<Livro> ListarTodos();
 
+        List<Livro> ListarMeus(int id);
+
         void Cadastrar(Livro novoLivro);
 
     }

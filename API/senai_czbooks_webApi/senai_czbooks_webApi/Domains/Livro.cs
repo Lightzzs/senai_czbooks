@@ -8,6 +8,7 @@ namespace senai_czbooks_webApi.Domains
     public partial class Livro
     {
         public int IdLivro { get; set; }
+        public int? IdUsuario { get; set; }
         public int? IdAutor { get; set; }
         public int? IdCategoria { get; set; }
         public int? IdLivraria { get; set; }
@@ -16,8 +17,9 @@ namespace senai_czbooks_webApi.Domains
         public DateTime DataPublicacao { get; set; }
         public string Preco { get; set; }
 
-        public virtual Autores IdAutorNavigation { get; set; }
+        public virtual Autore IdAutorNavigation { get; set; }
         public virtual Categoria IdCategoriaNavigation { get; set; }
         public virtual Livraria IdLivrariaNavigation { get; set; }
+        public virtual Usuario IdUsuarioNavigation { get; set; }
     }
 }

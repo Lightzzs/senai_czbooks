@@ -14,7 +14,8 @@ CREATE TABLE Usuarios
 	IdUsuario INT PRIMARY KEY IDENTITY,
 	IdTipoUsuario INT FOREIGN KEY REFERENCES TiposUsuarios (IdTipoUsuario),
 	Email VARCHAR(200)NOT NULL,
-	Senha	VARCHAR(200)NOT NULL
+	Senha	VARCHAR(200)NOT NULL,
+	Nome VARCHAR(200)NOT NULL
 );
 GO
 
@@ -44,6 +45,7 @@ GO
 CREATE TABLE Livros
 (
 	IdLivro INT PRIMARY KEY IDENTITY,
+	IdUsuario INT FOREIGN KEY REFERENCES Usuarios (IdUsuario),
 	IdAutor INT FOREIGN KEY REFERENCES Autores (IdAutor),
 	IdCategoria	INT FOREIGN KEY REFERENCES Categorias (IdCategoria),
 	IdLivraria	INT FOREIGN KEY REFERENCES Livrarias (IdLivraria),

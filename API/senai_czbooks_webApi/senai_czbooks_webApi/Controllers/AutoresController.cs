@@ -5,6 +5,7 @@ using senai_czbooks_webApi.Interfaces;
 using senai_czbooks_webApi.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,10 +23,9 @@ namespace senai_czbooks_webApi.Controllers
             _autoresRepository = new AutoresRepository();
         }
 
-
         [Authorize(Roles = "1, 2")]
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("Listar")]
+        public IActionResult Listar()
         {
             try
             {

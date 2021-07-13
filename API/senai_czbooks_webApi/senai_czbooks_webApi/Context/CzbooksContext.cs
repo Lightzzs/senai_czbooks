@@ -18,7 +18,7 @@ namespace senai_czbooks_webApi.Context
         {
         }
 
-        public virtual DbSet<Autores> Autores { get; set; }
+        public virtual DbSet<Autore> Autores { get; set; }
         public virtual DbSet<Categoria> Categorias { get; set; }
         public virtual DbSet<Livraria> Livrarias { get; set; }
         public virtual DbSet<Livro> Livros { get; set; }
@@ -29,7 +29,8 @@ namespace senai_czbooks_webApi.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=VINICIUS-PC\\SQLEXPRESS; Initial Catalog=CZBooks_; user id=sa; pwd=sa@132;");
+// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Data Source=LAB08DES1158689\\SQLEXPRESS01; Initial Catalog=CZBooks_; user id=sa; pwd=sa132;");
             }
         }
 
@@ -37,10 +38,10 @@ namespace senai_czbooks_webApi.Context
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
 
-            modelBuilder.Entity<Autores>(entity =>
+            modelBuilder.Entity<Autore>(entity =>
             {
                 entity.HasKey(e => e.IdAutor)
-                    .HasName("PK__Autores__DD33B031A0FA864A");
+                    .HasName("PK__Autores__DD33B03140577A73");
 
                 entity.Property(e => e.Nome)
                     .IsRequired()
@@ -56,7 +57,7 @@ namespace senai_czbooks_webApi.Context
             modelBuilder.Entity<Categoria>(entity =>
             {
                 entity.HasKey(e => e.IdCategoria)
-                    .HasName("PK__Categori__A3C02A10AB31EE7E");
+                    .HasName("PK__Categori__A3C02A102019D23B");
 
                 entity.Property(e => e.Descricao)
                     .IsRequired()
@@ -67,7 +68,7 @@ namespace senai_czbooks_webApi.Context
             modelBuilder.Entity<Livraria>(entity =>
             {
                 entity.HasKey(e => e.IdLivraria)
-                    .HasName("PK__Livraria__AC9443CB0C98306C");
+                    .HasName("PK__Livraria__AC9443CB3DDB2462");
 
                 entity.Property(e => e.Endereco)
                     .IsRequired()
@@ -83,7 +84,7 @@ namespace senai_czbooks_webApi.Context
             modelBuilder.Entity<Livro>(entity =>
             {
                 entity.HasKey(e => e.IdLivro)
-                    .HasName("PK__Livros__3B69D85A73B61D7D");
+                    .HasName("PK__Livros__3B69D85A55285C9D");
 
                 entity.Property(e => e.DataPublicacao).HasColumnType("date");
 
@@ -105,23 +106,28 @@ namespace senai_czbooks_webApi.Context
                 entity.HasOne(d => d.IdAutorNavigation)
                     .WithMany(p => p.Livros)
                     .HasForeignKey(d => d.IdAutor)
-                    .HasConstraintName("FK__Livros__IdAutor__6A30C649");
+                    .HasConstraintName("FK__Livros__IdAutor__440B1D61");
 
                 entity.HasOne(d => d.IdCategoriaNavigation)
                     .WithMany(p => p.Livros)
                     .HasForeignKey(d => d.IdCategoria)
-                    .HasConstraintName("FK__Livros__IdCatego__6B24EA82");
+                    .HasConstraintName("FK__Livros__IdCatego__44FF419A");
 
                 entity.HasOne(d => d.IdLivrariaNavigation)
                     .WithMany(p => p.Livros)
                     .HasForeignKey(d => d.IdLivraria)
-                    .HasConstraintName("FK__Livros__IdLivrar__6C190EBB");
+                    .HasConstraintName("FK__Livros__IdLivrar__45F365D3");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.Livros)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .HasConstraintName("FK__Livros__IdUsuari__4316F928");
             });
 
             modelBuilder.Entity<TiposUsuario>(entity =>
             {
                 entity.HasKey(e => e.IdTipoUsuario)
-                    .HasName("PK__TiposUsu__CA04062B4879F36A");
+                    .HasName("PK__TiposUsu__CA04062BF4F20A83");
 
                 entity.Property(e => e.Descricao)
                     .IsRequired()
@@ -132,9 +138,14 @@ namespace senai_czbooks_webApi.Context
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__Usuarios__5B65BF97A198ECE0");
+                    .HasName("PK__Usuarios__5B65BF97D73A027A");
 
                 entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nome)
                     .IsRequired()
                     .HasMaxLength(200)
                     .IsUnicode(false);

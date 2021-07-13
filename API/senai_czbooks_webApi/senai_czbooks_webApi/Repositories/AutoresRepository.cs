@@ -14,9 +14,10 @@ namespace senai_czbooks_webApi.Repositories
 
         CzbooksContext ctx = new CzbooksContext();
 
-        public List<Autores> Listar()
+        public List<Autore> Listar()
         {
             return ctx.Autores.Include(x => x.Livros).ToList();
         }
+     
     }
 }

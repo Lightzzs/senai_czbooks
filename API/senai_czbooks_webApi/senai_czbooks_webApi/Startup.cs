@@ -98,7 +98,7 @@ namespace senai_czbooks_webApi
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CZBooks.webApi");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "czbooks.webApi");
                 c.RoutePrefix = string.Empty;
             });
 

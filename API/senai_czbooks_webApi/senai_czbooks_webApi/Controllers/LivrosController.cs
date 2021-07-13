@@ -6,6 +6,7 @@ using senai_czbooks_webApi.Interfaces;
 using senai_czbooks_webApi.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,10 +24,10 @@ namespace senai_czbooks_webApi.Controllers
             _livroRepository = new LivroRepository();
         }
 
-        [Authorize(Roles = "2")]
-        [HttpGet]
+        [Authorize]
+        [HttpGet("listartodas")]
 
-        public IActionResult Get()
+        public IActionResult ListarTodas()
         {
             try
             {
@@ -35,6 +36,26 @@ namespace senai_czbooks_webApi.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex);
+            }
+        }
+
+        [Authorize(Roles = "2")]
+        [HttpGet("minhas")]
+        public IActionResult GetMy()
+        {
+            try
+            {
+                int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+
+                return Ok(_livroRepository.ListarMeus(idUsuario));
+            }
+            catch (Exception error)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "Não é possível mostrar as presenças se o usuário não estiver logado!",
+                    error
+                });
             }
         }
 

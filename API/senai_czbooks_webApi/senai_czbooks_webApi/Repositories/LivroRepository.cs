@@ -1,4 +1,6 @@
-﻿using senai_czbooks_webApi.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using senai_czbooks_webApi.Context;
+using senai_czbooks_webApi.Context;
 using senai_czbooks_webApi.Domains;
 using senai_czbooks_webApi.Interfaces;
 using System;
@@ -17,6 +19,18 @@ namespace senai_czbooks_webApi.Repositories
             ctx.Livros.Add(novoLivro);
 
             ctx.SaveChanges();
+        }
+
+        public List<Livro> ListarMeus(int id)
+        {
+            return ctx.Livros
+
+                .Include(p => p.IdAutorNavigation)
+                .Include(p => p.IdUsuarioNavigation.IdTipoUsuarioNavigation)
+                .Include(p => p.IdAutorNavigation.IdUsuarioNavigation)
+                .Where(p => p.IdUsuario == id)
+                .ToList();
+
         }
 
         public List<Livro> ListarTodos()
