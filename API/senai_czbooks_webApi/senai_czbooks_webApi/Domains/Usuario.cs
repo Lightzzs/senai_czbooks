@@ -11,7 +11,7 @@ namespace senai_czbooks_webApi.Domains
     {
         public Usuario()
         {
-            Autores = new HashSet<Autore>();
+            Autores = new HashSet<Autores>();
         }
 
         public int IdUsuario { get; set; }
@@ -23,7 +23,6 @@ namespace senai_czbooks_webApi.Domains
         public string Senha { get; set; }
 
         public virtual TiposUsuario IdTipoUsuarioNavigation { get; set; }
-        public virtual ICollection<Autore> Autores { get; set; }
-        public ClaimsIdentity NomeUsuario { get; internal set; }
+        public virtual ICollection<Autores> Autores { get; set; }
     }
 }

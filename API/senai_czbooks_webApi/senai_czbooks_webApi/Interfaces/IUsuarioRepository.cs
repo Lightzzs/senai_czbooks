@@ -9,5 +9,9 @@ namespace senai_czbooks_webApi.Interfaces
     interface IUsuarioRepository
     {
         Usuario Login(string email, string senha);
+
+        void Cadastrar(Usuario novoUsuario);
+
+        List<Usuario> Listar();
     }
 }

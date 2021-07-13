@@ -18,7 +18,7 @@ namespace senai_czbooks_webApi.Context
         {
         }
 
-        public virtual DbSet<Autore> Autores { get; set; }
+        public virtual DbSet<Autores> Autores { get; set; }
         public virtual DbSet<Categoria> Categorias { get; set; }
         public virtual DbSet<Livraria> Livrarias { get; set; }
         public virtual DbSet<Livro> Livros { get; set; }
@@ -29,7 +29,7 @@ namespace senai_czbooks_webApi.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=LAB08DESK115999\\SQLEXPRESS; Initial Catalog=CZBooks_; user id=sa; pwd=sa132;");
+                optionsBuilder.UseSqlServer("Data Source=VINICIUS-PC\\SQLEXPRESS; Initial Catalog=CZBooks_; user id=sa; pwd=sa@132;");
             }
         }
 
@@ -37,7 +37,7 @@ namespace senai_czbooks_webApi.Context
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
 
-            modelBuilder.Entity<Autore>(entity =>
+            modelBuilder.Entity<Autores>(entity =>
             {
                 entity.HasKey(e => e.IdAutor)
                     .HasName("PK__Autores__DD33B031A0FA864A");
